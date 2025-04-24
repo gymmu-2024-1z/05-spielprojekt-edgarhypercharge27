@@ -1,4 +1,4 @@
-import Phaser from "phaser.js"
+import Phaser from "phaser"
 import Cave from "../gameObjects/doors/cave.js"
 import Player from "../gameObjects/player/player.js"
 import NPC from "../gameObjects/player/npc.js"

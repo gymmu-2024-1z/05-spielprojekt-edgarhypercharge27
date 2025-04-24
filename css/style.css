@@ -84,7 +84,15 @@ main > section > h2 {
 }
 
 #gameCanvas {
-  display: none;
-  background-color: lightblue;
-  border: 2px solid black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background-color: lightskyblue;
+  margin: 0;
+  padding: 0;
+  border: none;
+  z-index: 9999;
 }

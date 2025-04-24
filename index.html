@@ -9,6 +9,7 @@
   </head>
 
   <body>
+    <canvas id="gameCanvas" style="display: none"></canvas>
     <main>
       <h1>Tom & Jerry</h1>
       <!-- Intro-Bereich -->
@@ -16,13 +17,6 @@
         <h2>Willkommen zum Tom & Jerry Spiel!</h2>
         <p>Helfe Jerry, den Käse zu sammeln und den bösen Tom zu entkommen.</p>
       </div>
-
-      <!-- Spielbereich (Canvas wird später angezeigt) -->
-      <canvas
-        id="gameCanvas"
-        width="800"
-        height="400"
-        style="display: none"></canvas>
 
       <section>
         <h2>Spielprinzip</h2>
@@ -48,6 +42,7 @@
         <button id="startBtn">Spiel starten</button>
       </div>
     </main>
+
     <script type="module" src="./src/start.js"></script>
   </body>
 </html>
