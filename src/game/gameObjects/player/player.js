@@ -2,174 +2,119 @@ import Phaser from "phaser"
 import EVENTS from "../../events"
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-  keys = {}
-  hp = 10
-  maxHp = 100
-  speed = 100
+  hp = 3 // Jerry startet mit 3 Leben
+  maxHp = 3 //Maximalzahl der Leben
+  speed = 200 //Anfangsgeschwindigkeit von Jerr
+  isDead = false //wird auf true gesetzt, wenn Jerry stirbt
+  controls = {
+    left: false,
+    right: false,
+    up: false,
+    down: false,
+  }
 
   constructor(scene, x, y) {
-    super(scene, x, y, "player")
+    super(scene, x, y, "Jerry")
     this.scene.add.existing(this)
     this.scene.physics.add.existing(this, false)
-    this.body.collideWorldBounds = false
+    this.body.collideWorldBounds = true //Jerry kann nicht aus der Welt hinauslaufen
     this.setOrigin(0.5, 0.5)
     this.setSize(24, 24, false)
     this.setOffset(4, 8)
-
-    this.setControls()
-
-    // Hier schicken wir ein Ereignis los. Phaser schnappt das auf, und führt
-    // die Funktion aus, die beim Emitter von "update-hp" definiert wurde. So
-    // können wir bequem über verschiedene Objekte kommunizieren.
-    EVENTS.emit("update-hp", this.hp)
   }
 
-  /**
-   * Erhöhe die Geschwindigkeit des Spielers.
-   *
-   * Die Geschwindigkeit kann den Wert von 960 nicht übersteigen.
-   *
-   * @param {integer} value Die Geschwindigkeit der Spielers.
-   */
-  increaseSpeed(value) {
-    this.speed = Math.min(this.speed + value, 960)
-  }
-
-  /**
-   * Vermindere die Geschwindigkeit des Spielers.
-   *
-   * Die Geschwindigkeit kann den Wert 100 nicht unterschreiten.
-   *
-   * @param {integer} value Um welchen Wert die Geschwindigkeit vermindert
-   * werden soll.
-   */
-  decreaseSpeed(value) {
-    this.speed = Math.max(100, this.speed - value)
-  }
-
-  setControls() {
-    this.cursor = this.scene.input.keyboard.createCursorKeys()
-  }
-
+  //Diese Funktion wird ständig aufgerufen, um Jerry zu bewegen
   update() {
-    const { left, right, up, down } = this.cursor
-    let isIdle = true
+    if (this.isDead) {
+      return //Wenn Jerry tot ist, passiert nichts mehr
+    }
 
+    //Setze Geschwindigkeit auf 0, damit Jerry nicht plötzlich weiterläuft
     this.body.setVelocityX(0)
     this.body.setVelocityY(0)
 
-    if (left.isDown) {
+    let isIdle = true //Markiert, ob Jerry inaktiv ist
+
+    //Wenn die linke Taste gedrückt wird, bewegt sich Jerry nach links
+    if (this.controls.left) {
       this.body.setVelocityX(-this.speed)
-      if (isIdle) this.anims.play("player_left", true)
+      if (isIdle) this.anims.play("player_left", true) // Animation für Bewegung nach links
       isIdle = false
     }
-    if (right.isDown) {
+    //Wenn die rechte Taste gedrückt wird, bewegt sich Jerry nach rechts.
+    if (this.controls.right) {
       this.body.setVelocityX(this.speed)
-      if (isIdle) this.anims.play("player_right", true)
+      if (isIdle) this.anims.play("player_right", true) //Animation für Bewegung nach rechts
       isIdle = false
     }
 
-    if (up.isDown) {
+    //Wenn die obere Taste gedrückt wird, bewegt sich Jerry nach oben
+    if (this.controls.up) {
       this.body.setVelocityY(-this.speed)
-      if (isIdle) this.anims.play("player_up", true)
-      isIdle = false
-    }
-    if (down.isDown) {
-      this.body.setVelocityY(this.speed)
-      if (isIdle) this.anims.play("player_down", true)
-      isIdle = false
+      if (isIdle) this.anims.play("player_up", true) // Animation für Bewegung nach oben
     }
 
+    //Wenn die untere Taste gedrückt wird, bewegt sich Jerry nach unten
+    if (this.controls.down) {
+      this.body.setVelocityY(this.speed)
+      if (isIdle) this.anims.play("player_down", true) //Animation für Bewegung nach unten
+    }
+
+    // Wenn Jerry inaktiv ist, wird die "Idle-Animation" abgespielt
     if (isIdle) {
-      this.anims.play("player_idle", true)
+      this.anims.play("player_idle", true) //Animation für Inaktivität
+    }
+
+    //Wenn Jerry in die Höhle läuft, startet das nächste Level
+    if (this.scene.physics.overlap(this, this.scene.hoehleneingang)) {
+      this.scene.scene.start("HoehlenSzene")
     }
   }
 
-  /**
-   * Heile den Spieler.
-   *
-   * Der Spieler wird um die angegebene Menge an HP geheilt. Das Maximum der
-   * Lebenspunkte kann nicht überstiegen werden.
-   *
-   * @param {integer} value Die Menge an Lebenspunkten um die der Spieler
-   * geheilt wird.
-   */
+  //Diese Funktion wird aufgerufen, um Jerry schneller zu machen
+  increaseSpeed(value) {
+    this.speed = Math.min(this.speed + value, 960) //Geschwindigkeit kann nicht über 960 gehen
+  }
+
+  //Diese Funktion verringert die Geschwindigkeit von Jerry
+  decreaseSpeed(value) {
+    this.speed = Math.max(100, this.speed - value) //Geschwindigkeit kann nicht unter 100 fallen
+  }
+
+  //Diese Funktion setzt die Steuerung mit den Pfeiltasten
+  setControls() {
+    this.cursor = this.scene.input.keyboard.createCursorKeys() //Tasteneingaben für Bewegung
+  }
+
+  //Diese Funktion heilt Jerry um eine bestimmte Menge an Leben
   heal(value) {
     if (value == null) value = 0
-    this.hp = this.hp + value
+    this.hp += value //Lebenspunkte erhöhen
     if (this.hp > this.maxHp) {
-      this.hp = this.mapHp
+      this.hp = this.maxHp //Lebenspunkte können nicht über das Maximum steigen
     }
 
-    // Die Lebenspunkte des Spielers wurden verändert, also schicken wir das
-    // Ereignis "update-hp" los. Das wird von einer anderen Szene aufgeschnappt,
-    // und die Lebenspunkte werden angepasst. So können wir einfach mit einer
-    // anderen Szene kommunizieren, ohne das wir diese kennen müssen.
+    //Teile dem Spiel mit, dass sich Jerrys Leben geändert haben
     EVENTS.emit("update-hp", this.hp)
   }
 
-  /**
-   * Füge dem Spielobjekt Schaden hinzu.
-   *
-   * Die Lebenspunkte des Spielers werden verringert. Wenn die Lebenspunkte
-   * unter 0 fallen, dann soll der Spieler sterben.
-   *
-   * @param {integer} value Der Schaden der dem Spieler zugefügt werden soll.
-   */
+  //Diese Funktion wird aufgerufen, wenn Jerry Schaden erleidet
   damage(value) {
     if (value == null) value = 0
-    this.hp = this.hp - value
+    this.hp -= value //Lebenspunkte verringern
     if (this.hp <= 0) {
-      // TODO: Game-Over Mechanik implementieren.
       this.hp = 0
+      this.die() //Wenn keine Lebenspunkte mehr da sind, stirbt Jerry
     }
 
-    // Gleich wie bei `heal()`
+    //Info an  Spiel, dass Leben sich geändert haben
     EVENTS.emit("update-hp", this.hp)
   }
 
-  /**
-   * Fügt dem Spieler einen Schlüssel hinzu.
-   *
-   * Der Spieler kann verschiedene Items haben. Eine spezielle Variante von
-   * Items sind Schlüssel. Der Spieler hat eine Liste von Schlüsseln. Diese
-   * haben alle einen Namen. Der Name des Schlüssels wird in den
-   * `customProperties` in `tiled` gesetzt. Jedesmal wenn wir einen Schlüssel
-   * hinzufügen, wird die Anzahl der Schlüssel mit dem Namen ums 1 erhöht. Wenn
-   * der Schlüssel noch nicht im Inventar ist, wird er auf 1 gesetzt.
-   *
-   * @param {string} keyName Name des Schlüssels der hinzugefügt wird.
-   */
-  addKey(keyName) {
-    if (this.keys[keyName] == null) {
-      this.keys[keyName] = 1
-    } else {
-      this.keys[keyName] += 1
-    }
-
-    // Kommentiere diese Zeil ein, um die Schlüssel nach einer VEränderung
-    // anzuzeigen.
-    // console.log(this.keys)
-  }
-
-  /**
-   * Entferne einen Schlüssel mit speziellem Namen aus dem Inventar der Spielers.
-   *
-   * Für mehr Informationen zu Schlüssel und Spieler, schaue in der Methode
-   * `addKey()` nach.
-   *
-   * Ein Schlüssel wird entfernt. Wenn der Schlüssel nicht im Inventar ist,
-   * passiert nichts. Wenn die Menge an Schlüssel mit dem Namen kleiner oder
-   * gleich 0 ist, wird der Eintrag entfernt.
-   *
-   * @param {string} keyName Name des Schlüssels.
-   *
-   */
-  removeKey(keyName) {
-    if (this.keys[keyName] == null) return
-    this.keys[keyName] -= 1
-    if (this.keys[keyName] <= 0) {
-      this.keys[keyName] = null
-    }
+  //Diese Funktion lässt Jerry sterben und führt nach dem Tod etwas aus
+  die() {
+    this.isDead = true //Jerry ist tot
+    this.anims.play("player_die", true) //Todes Animation abspielen
+    this.scene.scene.restart()
   }
 }
