@@ -7,5 +7,5 @@ document.querySelector("#startBtn").addEventListener("click", () => {
   document.getElementById("gameCanvas").style.display = "block"
 
   //Jetzt startet das Spiel
-  import("./main.js")
+  import("./game/main.js")
 })

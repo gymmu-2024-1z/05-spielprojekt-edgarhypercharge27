@@ -1,9 +1,8 @@
-import Phaser from "phaser"
-import Mushroom from "../gameObjects/pickups/mushroom"
-import Flower from "../gameObjects/pickups/flower"
-import Cave from "../gameObjects/doors/cave"
-import Player from "../gameObjects/player/player"
-import NPC from "../gameObjects/player/npc"
+import Phaser from "phaser.js"
+import Cave from "../gameObjects/doors/cave.js"
+import Player from "../gameObjects/player/player.js"
+import NPC from "../gameObjects/player/npc.js"
+import Cheese from "../gameObjects/pickups/Cheese.js"
 
 /**
  * Erweiterung einer Phaser.Scene mit praktischen Funktionen um Spielobjekte

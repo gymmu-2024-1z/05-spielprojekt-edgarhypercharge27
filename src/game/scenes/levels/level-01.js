@@ -1,7 +1,3 @@
-import Flower from "../../gameObjects/pickups/flower"
-import Mushroom from "../../gameObjects/pickups/mushroom"
-import Base2DScene from "../base-2d-scene"
-
 /**
  * Spiellogik für das Level01.
  */
