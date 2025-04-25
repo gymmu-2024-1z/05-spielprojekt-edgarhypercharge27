@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Fredoka", sans-serif;
-  background-image: url("../img/käse\ hintergrund.jpg");
+  background-image: url("../img/käse hintergrund.jpg");
   background-repeat: repeat;
   background-size: 200px;
   color: #2d1403;
@@ -55,15 +55,12 @@ pre {
 
 main {
   max-width: 1000px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  position: relative;
 }
 
 .intro-text {
@@ -108,7 +105,7 @@ main {
 .controls-table {
   margin-top: 1.5rem;
   background-color: #fff8e1;
-  padding: 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 12px;
   box-shadow: 0 0 10px #ffcc00;
 }
@@ -119,36 +116,41 @@ main {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
+#startBtn,
 .start-btn {
-  margin-top: 2rem;
-  padding: 1rem 2.5rem;
-  font-size: 1.5rem;
+  display: block;
+  margin: 2rem auto 1rem;
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: white;
-  background: linear-gradient(145deg, #ff9900, #ff5e00);
+  background: linear-gradient(to bottom, #ff3b3b, #b80000);
   border: none;
-  border-radius: 15px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 4px 4px 10px #888;
-  animation: pulse 2.5s infinite;
+  animation: zoomInOut 2s infinite ease-in-out;
+  box-shadow:
+    0 0 10px #fff,
+    0 0 20px #ff6666,
+    0 0 40px #ff6666;
+  text-shadow: 1px 1px 2px #000;
+  transition: transform 0.3s ease-in-out;
 }
 
-.start-btn:hover {
-  transform: scale(1.08);
-  background: linear-gradient(145deg, #ff6600, #ff3300);
+#startBtn:hover {
+  transform: scale(1.1);
 }
 
-@keyframes pulse {
+@keyframes zoomInOut {
   0%,
   100% {
-    box-shadow: 0 0 20px #ffd700;
+    transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 20px #ffcc00;
+    transform: scale(1.08);
   }
 }
 
@@ -160,12 +162,12 @@ main {
   border: none;
 }
 
-.credits {
-  text-align: center;
-  font-weight: bold;
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 15px;
-  font-family: "Comic Sans MS", cursive,  sans-serif;
+.site-credits {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 0.85rem;
+  color: #3d2b1f;
+  opacity: 0.7;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
