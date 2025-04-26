@@ -1,29 +1,23 @@
+// Phaser wird geladen
 import Phaser from "phaser"
-/**
- * Spiellogik für das Level02.
- */
+
+// Unsere Lade-Szene wird erstellt
 export default class LoadingScene extends Phaser.Scene {
   constructor() {
-    super({ key: "loading" })
+    super({ key: "loading" }) // Name der Szene ist "loading"
   }
 
-  /**
-   * Mit dieser Methode werden alle Resourcen geladen die vom Spiel gebraucht
-   * werden. Hier werden alle Grafiken und auch Töne geladen. Diese können
-   * danach im ganzen Spiel verwendet werden.
-   */
   preload() {
-    // Lade das Spritesheet für den Spieler.
+    // Spieler-Spritesheet laden
     this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
       frameHeight: 32,
     })
 
-    // Lade das Tileset für die Karten und die Objekte.
+    // Bild für die Maps laden
     this.load.image("tileset", "./assets/tileset.png")
 
-    // Lade einen Atlas von einem Tileset. Damit können einzelne Kacheln aus
-    // einem Tileset definiert werden.
+    // Sachen zum Aufsammeln und Türen laden
     this.load.atlas(
       "pickups",
       "./assets/tileset.png",
@@ -35,72 +29,62 @@ export default class LoadingScene extends Phaser.Scene {
       "./assets/atlas/atlas-doors.json",
     )
 
-    // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
-    // wir das hier registrieren.
-    this.SPACE = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE,
+    // Alle Maps laden
+    this.load.tilemapTiledJSON(
+      "map-level-01",
+      "./assets/maps/map-level-01.json",
+    )
+    this.load.tilemapTiledJSON(
+      "map-level-02",
+      "./assets/maps/map-level-02.json",
+    )
+    this.load.tilemapTiledJSON(
+      "map-level-03",
+      "./assets/maps/map-level-03.json",
     )
   }
 
   create() {
-    this.createAnimations()
-
-    this.add
-      .text(320, 240, "Press SPACE to start the Game.")
-      .setOrigin(0.5, 0.5)
-  }
-
-  update() {
-    if (this.SPACE.isDown) {
-      this.scene.start("level-01")
-    }
+    this.createAnimations() // Animationen erstellen
   }
 
   createAnimations() {
+    // Animation wenn Spieler still steht
     this.anims.create({
       key: "player_idle",
-      frames: this.anims.generateFrameNumbers("player", {
-        start: 1,
-        end: 1,
-      }),
+      frames: this.anims.generateFrameNumbers("player", { start: 1, end: 1 }),
       frameRate: 10,
       repeat: -1,
     })
 
+    // Animation wenn Spieler nach rechts läuft
     this.anims.create({
       key: "player_right",
-      frames: this.anims.generateFrameNumbers("player", {
-        start: 6,
-        end: 8,
-      }),
+      frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
       frameRate: 10,
       repeat: -1,
     })
 
+    // Animation wenn Spieler nach links läuft
     this.anims.create({
       key: "player_left",
-      frames: this.anims.generateFrameNumbers("player", {
-        start: 3,
-        end: 5,
-      }),
+      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
       frameRate: 10,
       repeat: -1,
     })
+
+    // Animation wenn Spieler nach oben läuft
     this.anims.create({
       key: "player_up",
-      frames: this.anims.generateFrameNumbers("player", {
-        start: 9,
-        end: 11,
-      }),
+      frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
       frameRate: 10,
       repeat: -1,
     })
+
+    // Animation wenn Spieler nach unten läuft
     this.anims.create({
       key: "player_down",
-      frames: this.anims.generateFrameNumbers("player", {
-        start: 0,
-        end: 2,
-      }),
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
       frameRate: 10,
       repeat: -1,
     })

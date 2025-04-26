@@ -1,4 +1,4 @@
-import Base2DScene from "../base-2d-scene"
+import Base2DScene from "../base-2d-scene.js"
 
 /**
  * Spiellogik für das Level03.

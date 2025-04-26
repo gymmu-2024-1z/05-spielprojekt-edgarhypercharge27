@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <canvas id="gameCanvas" style="display: none"></canvas>
+    <canvas id="game-canvas" style="display: none"></canvas>
 
     <main>
       <h1>Tom & Jerry</h1>
@@ -28,7 +28,7 @@
           <img src="img/rpg.png" alt="Screenshot vom Spiel" />
           <p>
             Du spielst Jerry – eine flinke Maus auf der Jagd nach Käse. Doch
-            Vorsicht: Tom ist dir dicht auf den Fersen! <br /><br />
+            Vorsicht: Tom ist dir dicht auf den Fersen!<br /><br />
             Sammle Käse, weiche Fallen aus und lauf zur Höhle, bevor Tom dich
             erwischt. Je mehr Käse du findest, desto schneller wirst du – aber
             Tom auch.
@@ -59,6 +59,15 @@
       </div>
     </main>
 
-    <script type="module" src="./src/start.js"></script>
+    <script type="module">
+      import("./src/start.js").then(() => {
+        document.getElementById("startBtn").addEventListener("click", () => {
+          // Hauptmenü ausblenden
+          document.querySelector("main").style.display = "none"
+          // Canvas für das Spiel anzeigen
+          document.getElementById("game-canvas").style.display = "block"
+        })
+      })
+    </script>
   </body>
 </html>
