@@ -1,71 +1,66 @@
 import Base2DScene from "../base-2d-scene.js"
-/**
- * Spiellogik für das Level01.
- */
+import Cheese from "../../gameObjects/pickups/Cheese.js"
+
 export default class Level01 extends Base2DScene {
-  /**
-   * Der Konstuktor wird von Phaser verwendet um die Szene zu erstellen.
-   */
   constructor() {
-    // Damit rufen wir den Konstruktor von Base2DScene auf, und können
-    // Optionen an die Szene übergeben. Das brauchen wir damit Phaser einen
-    // Namen/Schlüssel für die Szene hat. Damit können wir später die Szene
-    // wechseln, wenn wir das brauchen.
     super({ key: "level-01" })
   }
 
-  /**
-   * Hier werden alle Resourcen geladen, die spezifisch für dieses Level / diese
-   * Szene benötigt werden.
-   */
   preload() {
-    // Lade die Karte für das aktuelle Level. Der erste Parameter ist der Name
-    // unter dem die Karte gespeichert wird. Der zweite Parameter ist die
-    // Kartendatei mit allen Daten drin.
     this.load.tilemapTiledJSON(
       "map-level-01",
       "./assets/maps/map-level-01.json",
     )
   }
 
-  /**
-   * Mit der Methode werden alle Spielobjekte für eine Szene erstellt.
-   */
   create() {
-    // Wir müssen hier die create-Methode der Klasse Base2DScene aufrufen,
-    // denn dort ist bereits beschrieben wie die Spielwelt nach der Kartendatei
-    // erstellt werden muss.
     super.create("map-level-01")
-
-    // TODO: Möchten wir zusätzliche Layers von der Karte ertellen lassen, oder
-    // spezifische Spielobjekte erstellen, dann können wir das hier machen.
-    // Besser wäre aber die jeweiligen Methoden zu überschreiben.
   }
 
-  /**
-   * @override Hier wird die Funktionalität der Base2DScene-Klasse überschrieben.
-   *
-   * Diese Methode wird immer dann aufgerufen, wenn der Spieler eine
-   * überschneidung mit einem Spielobjekt hat, das aufgenommen werden kann. Wir
-   * können hier bestimmen was in einem solchen fall passieren sollte. Die
-   * Parameter werden von Phaser in die Methode eingefügt, da haben wir keine
-   * direkte kontrolle darüber.
-   *
-   * @param {*} actor Der Spieler der mit dem Objekt überschneidet.
-   * @param {*} item Das Objekt mit dem der Spieler eine überschneitung hat.
-   */
   pickUp(actor, item) {
     super.pickUp(actor, item)
 
-    // TODO: Hier wird die Logik für Kollisionen von Spielobjekten geändert. Das
-    // ist pro Level anders. Wenn eine Logik für alle Levels gelten soll, dann
-    // muss dies in Base2DScene angepasst werden.
-    if (item instanceof Flower) {
-      // Das Objekt ist von der Klasse Flower
+    if (item instanceof Cheese) {
       this.player.addKey("level-02")
       this.player.increaseSpeed(100)
       this.player.heal(item.props.restoreHp || 0)
     }
-    // Hinweis: Es gibt hier *kein Mushroom* mehr, weil ihr den nicht benutzt.
+  }
+
+  createAnimations() {
+    this.anims.create({
+      key: "player_idle",
+      frames: this.anims.generateFrameNumbers("player", { start: 1, end: 1 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "player_right",
+      frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "player_left",
+      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "player_up",
+      frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "player_down",
+      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
+      frameRate: 10,
+      repeat: -1,
+    })
   }
 }

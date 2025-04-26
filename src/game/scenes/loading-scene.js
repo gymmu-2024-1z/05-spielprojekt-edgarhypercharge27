@@ -1,35 +1,27 @@
-// Phaser wird geladen
 import Phaser from "phaser"
 
-// Unsere Lade-Szene wird erstellt
 export default class LoadingScene extends Phaser.Scene {
   constructor() {
-    super({ key: "loading" }) // Name der Szene ist "loading"
+    super({ key: "loading" })
   }
 
   preload() {
-    // Spieler-Spritesheet laden
+    // Spieler-Spritesheet (Jerry) laden
     this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
       frameHeight: 32,
     })
 
-    // Bild für die Maps laden
+    // NPC-Spritesheet (Tom) laden
+    this.load.spritesheet("npc", "./assets/npc.png", {
+      frameWidth: 32,
+      frameHeight: 32,
+    })
+
+    // Tileset für die Welt laden
     this.load.image("tileset", "./assets/tileset.png")
 
-    // Sachen zum Aufsammeln und Türen laden
-    this.load.atlas(
-      "pickups",
-      "./assets/tileset.png",
-      "./assets/atlas/atlas-pickups.json",
-    )
-    this.load.atlas(
-      "doors",
-      "./assets/tileset.png",
-      "./assets/atlas/atlas-doors.json",
-    )
-
-    // Alle Maps laden
+    // Karten für Level laden
     this.load.tilemapTiledJSON(
       "map-level-01",
       "./assets/maps/map-level-01.json",
@@ -45,11 +37,11 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   create() {
-    this.createAnimations() // Animationen erstellen
+    this.createAnimations()
   }
 
   createAnimations() {
-    // Animation wenn Spieler still steht
+    // Animationen für Jerry (player)
     this.anims.create({
       key: "player_idle",
       frames: this.anims.generateFrameNumbers("player", { start: 1, end: 1 }),
@@ -57,7 +49,6 @@ export default class LoadingScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    // Animation wenn Spieler nach rechts läuft
     this.anims.create({
       key: "player_right",
       frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
@@ -65,7 +56,6 @@ export default class LoadingScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    // Animation wenn Spieler nach links läuft
     this.anims.create({
       key: "player_left",
       frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
@@ -73,7 +63,6 @@ export default class LoadingScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    // Animation wenn Spieler nach oben läuft
     this.anims.create({
       key: "player_up",
       frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
@@ -81,10 +70,45 @@ export default class LoadingScene extends Phaser.Scene {
       repeat: -1,
     })
 
-    // Animation wenn Spieler nach unten läuft
     this.anims.create({
       key: "player_down",
       frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    // Animationen für Tom (npc)
+    this.anims.create({
+      key: "npc_idle",
+      frames: this.anims.generateFrameNumbers("npc", { start: 1, end: 1 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_right",
+      frames: this.anims.generateFrameNumbers("npc", { start: 6, end: 8 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_left",
+      frames: this.anims.generateFrameNumbers("npc", { start: 3, end: 5 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_up",
+      frames: this.anims.generateFrameNumbers("npc", { start: 9, end: 11 }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_down",
+      frames: this.anims.generateFrameNumbers("npc", { start: 0, end: 2 }),
       frameRate: 10,
       repeat: -1,
     })
