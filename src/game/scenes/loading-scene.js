@@ -6,6 +6,12 @@ export default class LoadingScene extends Phaser.Scene {
   }
 
   preload() {
+    // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
+    // wir das hier registrieren.
+    this.SPACE = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
+    )
+
     // Spieler-Spritesheet (Jerry) laden
     this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
@@ -38,6 +44,25 @@ export default class LoadingScene extends Phaser.Scene {
 
   create() {
     this.createAnimations()
+
+    // Damit erstellen wir ein Spielobjekt Text. Wir geben die Position in x und y
+    // an, und geben den Text der angezeigt werden soll an.
+    const text = this.add.text(320, 240, "Press SPACE to start the Game.")
+
+    // Damit setzen wir den Ankerpunkt von dem Textelement auf die Mitte des Elements.
+    // Würden wir das nicht machen, ist die obere lenke Ecke der Ankerpunkt, und es wird
+    // schwierig den Text zu zentrieren.
+    text.setOrigin(0.5, 0.5)
+  }
+
+  update() {
+    // Wenn die Leertaste gedrückt wird, möchten wir darauf reagieren.
+    if (this.SPACE.isDown) {
+      // Die Leertaste wurde gedrückt, jetzt möchten wir eine neue Szene laden.
+      // Das was wir hier übergeben, ist der Schlüssel/Name der Szene, so wie
+      // es im Konstruktor angegeben wurde.
+      this.scene.start("level-01")
+    }
   }
 
   createAnimations() {
