@@ -1,51 +1,165 @@
 <!doctype html>
-<html>
+<html lang="de">
   <head>
-    <meta charset="utf-8" />
-    <title>Simple Reveal.js Presentation</title>
+    <meta charset="UTF-8" />
+    <title>Tom & Jerry – Spielpräsentation</title>
     <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
     <link
       rel="stylesheet"
-      href="/node_modules/reveal.js/dist/theme/dracula.css" />
+      href="/node_modules/reveal.js/dist/theme/white.css" />
+    <style>
+      body {
+        font-family: "Bangers", cursive;
+        background-color: #f6e27f; /* Altmodisch-gelber Hintergrund */
+        margin: 0;
+      }
+
+      .reveal {
+        color: #000;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        color: #d32f2f;
+        text-shadow: 2px 2px #00000060;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .reveal section {
+        background-color: #fdf3b5; /* Hellgelber Bereich */
+        border: 5px dashed #d32f2f;
+        border-radius: 18px;
+        padding: 20px;
+        margin: 20px auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .reveal ul li,
+      .reveal p {
+        font-size: 1.2em;
+        color: #000;
+        line-height: 1.4;
+        margin: 6px 0;
+      }
+
+      .reveal a {
+        color: #e60012;
+        text-decoration: underline;
+      }
+
+      .button-link {
+        display: inline-block;
+        margin: 30px auto 0 auto;
+        padding: 15px 40px;
+        background-color: #e60012;
+        color: white !important;
+        font-size: 1.5em;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        border-radius: 15px;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+      .button-link:hover {
+        background-color: #b30000;
+        transform: scale(1.05);
+      }
+    </style>
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
-        <!-- Dieser Abschnitt stellt eine Folie in Reveal.js dar -->
         <section>
-          <h1>Demo Spiel</h1>
-          <!-- Mit der Klasse fragment, werden Teile erst nach und nach eingeblendet.-->
-          <p class="fragment">Cedric Geissmann</p>
+          <h1>Tom & Jerry</h1>
+          <p>Ein selbst programmiertes Spiel</p>
+          <p>von Rozerin Gezer & Giulietta Cotti</p>
         </section>
 
         <section>
-          <h3>Spielprinzip</h3>
-          <!-- Wenn sections verschachtelt sind, werden damit Unterfolien erstellt.-->
-          <section>
-            <h4>Jump'n'Run</h4>
-            <ul>
-              <li>Bis zum Ende des Levels kommen</li>
-              <li>Pilze machen Schaden</li>
-              <li>Blumen geben Lebenspunkte</li>
-            </ul>
-          </section>
-
-          <!-- Das hier ist dann die zweite Folie unter dem gleichen Titel.-->
-          <section>
-            <h4>RPG</h4>
-            <ul>
-              <li>Pilze machen Schaden</li>
-              <li>Blumen geben Lebenspunkte</li>
-              <li>Man muss eine Blume sammeln um das Spiel zu beenden</li>
-              <li>Höhle am Ende des Levels betreten</li>
-            </ul>
-          </section>
+          <h2>Worum geht es im Spiel?</h2>
+          <ul>
+            <li>Man spielt Jerry – eine Maus auf der Flucht</li>
+            <li>Tom verfolgt ihn automatisch</li>
+            <li>Käse macht Jerry schneller</li>
+            <li>Tom wird mit der Zeit auch schneller</li>
+            <li>Man muss zur Höhle, um das Level zu beenden</li>
+          </ul>
         </section>
 
-        <!-- Die letzte Folie soll einen direkten Link zum Spiel sein. -->
         <section>
-          <a href="game.html" target="_blank">Demo</a>
+          <h2>Wie spielt man?</h2>
+          <ul>
+            <li>Pfeiltasten → Jerry bewegen</li>
+            <li>Käse sammeln → Geschwindigkeit steigt</li>
+            <li>Tom weicht man aus</li>
+            <li>Man muss Mäusefallen ausweichen</li>
+            <li>Zum Ziel (Höhle) rennen</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Was macht es spannend?</h2>
+          <ul>
+            <li>Tom verfolgt einen die ganze Zeit</li>
+            <li>Tom wird ständig schneller</li>
+            <li>Man muss schnell reagieren</li>
+            <li>Ohne Käse kann man nicht mehr entkommen</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Was wir gemacht haben</h2>
+          <ul>
+            <li>Level mit Tiled gebaut</li>
+            <li>Spiel in JavaScript mit Phaser programmiert</li>
+            <li>NPC (Tom) mit automatischer Verfolgung</li>
+            <li>Jerry reagiert auf Items</li>
+            <li>Animationen und Steuerung programmiert</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Was nicht funktioniert</h2>
+          <ul>
+            <li>Neue Map erscheint leider nicht</li>
+            <li>Alte Map wird weiterhin geladen</li>
+            <li>NPC (Tom) erscheint im Spiel nicht</li>
+            <li>Fehlermeldungen waren schwer zu finden</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Was wir gelernt haben</h2>
+          <ul>
+            <li>Wie man ein Spiel mit Code baut</li>
+            <li>Wie man mit Tiled und JSON arbeitet</li>
+            <li>Wie man Fehler sucht und testet</li>
+            <li>Wie man Figuren, Items, Gegner einbaut</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Fazit</h2>
+          <ul>
+            <li>Wir haben sehr viel dazugelernt</li>
+            <li>Auch wenn es nicht ganz fertig wurde</li>
+            <li>Wir verstehen jetzt, wie Games aufgebaut sind</li>
+            <li>Und wir hatten Spaß beim Programmieren</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Vielen Dank!</h2>
+          <p>Fragen?</p>
+          <a href="game.html" class="button-link">Spiel starten</a>
         </section>
       </div>
     </div>
