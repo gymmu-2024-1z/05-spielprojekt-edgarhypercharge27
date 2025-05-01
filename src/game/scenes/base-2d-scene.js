@@ -39,6 +39,18 @@ export default class Base2DScene extends Phaser.Scene {
 
   loadMap(mapKey) {
     this.map = this.make.tilemap({ key: mapKey }) // Map wird erstellt
+    this.physics.world.setBounds(
+      0,
+      0,
+      this.map.widthInPixels,
+      this.map.heightInPixels,
+    )
+    this.cameras.main.setBounds(
+      0,
+      0,
+      this.map.widthInPixels,
+      this.map.heightInPixels,
+    ) //damit der Player jetzt durch die ganze Map laufen kann und nicht durch eine unsichtbare Wand gestoppt wird.
     this.tiles = this.map.addTilesetImage("tileset") // Tileset wird hinzugefügt
     this.map.createLayer("Background", this.tiles, 0, 0) // Hintergrund Layer
     this.obstacles = this.map.createLayer("Obstacles", this.tiles, 0, 0) // Hindernisse Layer
