@@ -18,7 +18,6 @@ export default class Level02 extends Base2DScene {
 
   create() {
     super.create("map-level-02")
-    this.createAnimations()
   }
 
   pickUp(actor, item) {
