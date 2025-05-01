@@ -22,8 +22,8 @@ export default class Level01 extends Base2DScene {
 
     if (item instanceof Cheese) {
       this.player.addKey("level-02")
-      this.player.increaseSpeed(100)
-      this.player.heal(item.props.restoreHp || 0)
+      this.player.increaseSpeed(item.properties.speedHp || 100)
+      this.player.heal(item.properties.restoreHp || 0)
     }
   }
 

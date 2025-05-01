@@ -66,9 +66,9 @@
                  "name":"Cheese",
                  "properties":[
                         {
-                         "name":"speedHp",
-                         "type":"int",
-                         "value":10
+                         "name":"speedBoost",
+                         "type":"file",
+                         "value":"10"
                         }],
                  "rotation":0,
                  "type":"",
@@ -84,9 +84,9 @@
                  "name":"Cheese",
                  "properties":[
                         {
-                         "name":"speedHp",
-                         "type":"int",
-                         "value":10
+                         "name":"speedBoost",
+                         "type":"file",
+                         "value":"10"
                         }],
                  "rotation":0,
                  "type":"",
@@ -102,9 +102,9 @@
                  "name":"Cheese",
                  "properties":[
                         {
-                         "name":"speedHp",
-                         "type":"int",
-                         "value":10
+                         "name":"speedBoost",
+                         "type":"file",
+                         "value":"10"
                         }],
                  "rotation":0,
                  "type":"",
@@ -287,8 +287,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":382.666666666667,
-                 "y":255.666666666667
+                 "x":1568.69696969697,
+                 "y":223.060606060606
                 }],
          "opacity":1,
          "type":"objectgroup",

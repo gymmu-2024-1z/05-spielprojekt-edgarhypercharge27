@@ -45,17 +45,17 @@
  <objectgroup id="4" name="Items">
   <object id="25" name="Cheese" gid="4" x="576" y="320" width="32" height="32">
    <properties>
-    <property name="speedHp" type="int" value="10"/>
+    <property name="speedBoost" type="file" value="10"/>
    </properties>
   </object>
   <object id="36" name="Cheese" gid="4" x="1121" y="192.5" width="32" height="32">
    <properties>
-    <property name="speedHp" type="int" value="10"/>
+    <property name="speedBoost" type="file" value="10"/>
    </properties>
   </object>
   <object id="35" name="Cheese" gid="4" x="288.5" y="288.5" width="32" height="32">
    <properties>
-    <property name="speedHp" type="int" value="10"/>
+    <property name="speedBoost" type="file" value="10"/>
    </properties>
   </object>
   <object id="27" name="mousetrap" gid="6" x="480.25" y="288.167" width="32" height="32">
@@ -94,7 +94,7 @@
   <object id="21" name="SpawnPlayer" x="112.5" y="305"/>
  </objectgroup>
  <objectgroup id="5" name="Doors">
-  <object id="42" name="Cave" gid="7" x="382.667" y="255.667" width="32" height="32">
+  <object id="42" name="Cave" gid="7" x="1568.7" y="223.061" width="32" height="32">
    <properties>
     <property name="goToWorld" type="file" value="level-02"/>
    </properties>
