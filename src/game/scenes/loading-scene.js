@@ -69,35 +69,50 @@ export default class LoadingScene extends Phaser.Scene {
     // Animationen für Jerry (player)
     this.anims.create({
       key: "player_idle",
-      frames: this.anims.generateFrameNumbers("player", { start: 1, end: 1 }),
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 1,
+        end: 1,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "player_right",
-      frames: this.anims.generateFrameNumbers("player", { start: 6, end: 8 }),
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 6,
+        end: 8,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "player_left",
-      frames: this.anims.generateFrameNumbers("player", { start: 3, end: 5 }),
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 3,
+        end: 5,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "player_up",
-      frames: this.anims.generateFrameNumbers("player", { start: 9, end: 11 }),
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 9,
+        end: 11,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "player_down",
-      frames: this.anims.generateFrameNumbers("player", { start: 0, end: 2 }),
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 0,
+        end: 2,
+      }),
       frameRate: 10,
       repeat: -1,
     })
@@ -105,35 +120,50 @@ export default class LoadingScene extends Phaser.Scene {
     // Animationen für Tom (npc)
     this.anims.create({
       key: "npc_idle",
-      frames: this.anims.generateFrameNumbers("npc", { start: 1, end: 1 }),
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 1,
+        end: 1,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "npc_right",
-      frames: this.anims.generateFrameNumbers("npc", { start: 6, end: 8 }),
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 6,
+        end: 8,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "npc_left",
-      frames: this.anims.generateFrameNumbers("npc", { start: 3, end: 5 }),
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 3,
+        end: 5,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "npc_up",
-      frames: this.anims.generateFrameNumbers("npc", { start: 9, end: 11 }),
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 9,
+        end: 11,
+      }),
       frameRate: 10,
       repeat: -1,
     })
 
     this.anims.create({
       key: "npc_down",
-      frames: this.anims.generateFrameNumbers("npc", { start: 0, end: 2 }),
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 0,
+        end: 2,
+      }),
       frameRate: 10,
       repeat: -1,
     })
