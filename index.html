@@ -1,42 +1,77 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Projekt</title>
-
+    <title>Tom & Jerry - Das Spiel</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
+    <canvas id="game-canvas" style="display: none"></canvas>
+
     <main>
-      <h1>Unser Spiel</h1>
-      <div class="center margin-tb">
-        <a class="start-btn" href="game.html">Spiel starten</a>
+      <h1>Tom & Jerry</h1>
+
+      <!-- Intro -->
+      <div id="intro" class="center margin-tb">
+        <h2>Willkommen zum Tom & Jerry Spiel!</h2>
+        <p class="intro-text">
+          Hilf Jerry, Käse zu sammeln und vor Tom zu fliehen. Bereit?
+        </p>
       </div>
-      <section>
-        <h2>Intro</h2>
-        Eine kurze Einführung in unser Spiel.
-      </section>
+
+      <!-- Spielprinzip -->
       <section>
         <h2>Spielprinzip</h2>
         <div class="text-with-image">
-          <img src="img/rpg.png" />
-          <div class="text">Sammle die Blume und gehe in die Höhle.</div>
+          <img src="img/rpg.png" alt="Screenshot vom Spiel" />
+          <p>
+            Du spielst Jerry – eine flinke Maus auf der Jagd nach Käse. Doch
+            Vorsicht: Tom ist dir dicht auf den Fersen!<br /><br />
+            Sammle Käse, weiche Fallen aus und lauf zur Höhle, bevor Tom dich
+            erwischt. Je mehr Käse du findest, desto schneller wirst du – aber
+            Tom auch.
+          </p>
         </div>
       </section>
+
+      <!-- Steuerung -->
       <section>
         <h2>Steuerung</h2>
         <div class="controls-table">
           <div class="controls-row">
             <pre>Pfeiltasten</pre>
-            <span>In Richtung laufen</span>
+            <span>Bewege Jerry in alle Richtungen</span>
           </div>
         </div>
       </section>
+
+      <!-- Startbutton -->
       <div class="center margin-tb">
-        <a class="start-btn" href="game.html">Spiel starten</a>
+        <button id="startBtn" class="start-btn">
+          <a href="http://localhost:5173/phaser-playground/game.html"
+            >Spiel starten</a
+          >
+        </button>
+      </div>
+
+      <!-- Credits -->
+      <div class="site-credits">
+        Erstellt von <strong>Rozerin Gezer</strong> &amp;
+        <strong>Giulietta Cotti</strong>
       </div>
     </main>
+
+    <script type="module">
+      import("./src/start.js").then(() => {
+        document.getElementById("startBtn").addEventListener("click", () => {
+          // Hauptmenü ausblenden
+          document.querySelector("main").style.display = "none"
+          // Canvas für das Spiel anzeigen
+          document.getElementById("game-canvas").style.display = "block"
+        })
+      })
+    </script>
   </body>
 </html>

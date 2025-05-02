@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-
+// Die verschiedenen Teile vom Spiel werden geladen
 import LoadingScene from "./scenes/loading-scene.js"
 import Level01 from "./scenes/levels/level-01.js"
 import Level02 from "./scenes/levels/level-02.js"
@@ -16,14 +16,14 @@ const config = {
   width: 640, // Sollten möglichst vielfache von 32 sein, da unsere Tileset 32x32 Pixel gross sind.
   height: 480, // Gleich wie bei width.
   parent: "game-canvas", // Die ID von dem HTML-Element, in das das Spiel gezeichnet wird.
-  scene: [LoadingScene, UIScene, DebugScene, Level01, Level02, Level03], // Die Szenen des Spiels, hier können noch weitere Szenen angehängt werden.
+  scene: [LoadingScene, UIScene, DebugScene, Level01, Level02, Level03], // Jetzt ist Level00 dabei!
   physics: {
     default: "arcade",
     arcade: {
       debug: true,
-      gravity: { y: 0 },
+      gravity: { y: 1400 },
     },
   },
 }
-
-const game = new Phaser.Game(config)
+// Startet das Spiel
+export const game = new Phaser.Game(config)

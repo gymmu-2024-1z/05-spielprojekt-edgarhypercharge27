@@ -1,62 +1,72 @@
 import Phaser from "phaser"
-/**
- * Spiellogik für das Level02.
- */
+
 export default class LoadingScene extends Phaser.Scene {
   constructor() {
     super({ key: "loading" })
   }
 
-  /**
-   * Mit dieser Methode werden alle Resourcen geladen die vom Spiel gebraucht
-   * werden. Hier werden alle Grafiken und auch Töne geladen. Diese können
-   * danach im ganzen Spiel verwendet werden.
-   */
   preload() {
-    // Lade das Spritesheet für den Spieler.
+    // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
+    // wir das hier registrieren.
+    this.SPACE = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
+    )
+
+    // Spieler-Spritesheet (Jerry) laden
     this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
       frameHeight: 32,
     })
 
-    // Lade das Tileset für die Karten und die Objekte.
+    // NPC-Spritesheet (Tom) laden
+    this.load.spritesheet("npc", "./assets/npc.png", {
+      frameWidth: 32,
+      frameHeight: 32,
+    })
+
+    // Tileset für die Welt laden
     this.load.image("tileset", "./assets/tileset.png")
 
-    // Lade einen Atlas von einem Tileset. Damit können einzelne Kacheln aus
-    // einem Tileset definiert werden.
-    this.load.atlas(
-      "pickups",
-      "./assets/tileset.png",
-      "./assets/atlas/atlas-pickups.json",
+    // Karten für Level laden
+    this.load.tilemapTiledJSON(
+      "map-level-01",
+      "./assets/maps/map-level-01.json",
     )
-    this.load.atlas(
-      "doors",
-      "./assets/tileset.png",
-      "./assets/atlas/atlas-doors.json",
+    this.load.tilemapTiledJSON(
+      "map-level-02",
+      "./assets/maps/map-level-02.json",
     )
-
-    // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
-    // wir das hier registrieren.
-    this.SPACE = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE,
+    this.load.tilemapTiledJSON(
+      "map-level-03",
+      "./assets/maps/map-level-03.json",
     )
   }
 
   create() {
     this.createAnimations()
 
-    this.add
-      .text(320, 240, "Press SPACE to start the Game.")
-      .setOrigin(0.5, 0.5)
+    // Damit erstellen wir ein Spielobjekt Text. Wir geben die Position in x und y
+    // an, und geben den Text der angezeigt werden soll an.
+    const text = this.add.text(320, 240, "Press SPACE to start the Game.")
+
+    // Damit setzen wir den Ankerpunkt von dem Textelement auf die Mitte des Elements.
+    // Würden wir das nicht machen, ist die obere lenke Ecke der Ankerpunkt, und es wird
+    // schwierig den Text zu zentrieren.
+    text.setOrigin(0.5, 0.5)
   }
 
   update() {
+    // Wenn die Leertaste gedrückt wird, möchten wir darauf reagieren.
     if (this.SPACE.isDown) {
+      // Die Leertaste wurde gedrückt, jetzt möchten wir eine neue Szene laden.
+      // Das was wir hier übergeben, ist der Schlüssel/Name der Szene, so wie
+      // es im Konstruktor angegeben wurde.
       this.scene.start("level-01")
     }
   }
 
   createAnimations() {
+    // Animationen für Jerry (player)
     this.anims.create({
       key: "player_idle",
       frames: this.anims.generateFrameNumbers("player", {
@@ -86,6 +96,7 @@ export default class LoadingScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     })
+
     this.anims.create({
       key: "player_up",
       frames: this.anims.generateFrameNumbers("player", {
@@ -95,9 +106,61 @@ export default class LoadingScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     })
+
     this.anims.create({
       key: "player_down",
       frames: this.anims.generateFrameNumbers("player", {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    // Animationen für Tom (npc)
+    this.anims.create({
+      key: "npc_idle",
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 1,
+        end: 1,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_right",
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 6,
+        end: 8,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_left",
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 3,
+        end: 5,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_up",
+      frames: this.anims.generateFrameNumbers("npc", {
+        start: 9,
+        end: 11,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: "npc_down",
+      frames: this.anims.generateFrameNumbers("npc", {
         start: 0,
         end: 2,
       }),

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap");
+
 *,
 *::before,
 *::after {
@@ -5,84 +7,166 @@
 }
 
 body {
-  background-color: darkslategrey;
-  color: white;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  font-family: "Fredoka", sans-serif;
+  background-image: url("../img/käse hintergrund.jpg");
+  background-repeat: repeat;
+  background-size: 200px;
+  color: #2d1403;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
+  color: #d90429;
+  text-align: center;
+  margin: 1rem 0;
+  text-shadow: 3px 3px 0 #ffe600;
+  animation: floatText 3s ease-in-out infinite;
+}
+
+@keyframes floatText {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: #8b0000;
+  text-shadow: 1px 1px #ffdb58;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+p,
+span,
+pre {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #1e0b04;
+  text-shadow: 1px 1px #fff5ce;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
-main > section {
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-bottom: 2rem;
-  margin-top: 2rem;
-  width: 100%;
-}
-
-main > section:nth-child(2n-1) {
-  background-color: black;
-}
-
-main > section > h2 {
+.intro-text {
+  font-size: 1.3rem;
   text-align: center;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.start-btn {
-  padding: 1.5rem;
-  background-color: forestgreen;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1.5rem;
-}
-
-.start-btn:hover {
-  box-shadow: 2px 2px 5px black;
-}
-
-.margin-tb {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.center {
+.text-with-image {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.text-with-image img {
+  width: 350px;
+  border: 12px double #8b0000;
+  border-radius: 18px;
+  background-color: #ffe4b5;
+  box-shadow:
+    0 0 20px gold,
+    4px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.text-with-image p {
+  max-width: 420px;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  padding: 1.5rem;
+  background-color: #fff8dc;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #d4af37;
+  text-shadow: 1px 1px #ffe;
+  box-sizing: border-box;
 }
 
 .controls-table {
-  display: flex;
-  flex-direction: column;
+  margin-top: 1.5rem;
+  background-color: #fff8e1;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #ffcc00;
 }
 
 .controls-row {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
+  font-size: 1.1rem;
 }
 
-.text-with-image {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
+#startBtn,
+.start-btn {
+  display: block;
+  margin: 2rem auto 1rem;
+  padding: 1rem 3rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(to bottom, #ff3b3b, #b80000);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  animation: zoomInOut 2s infinite ease-in-out;
+  box-shadow:
+    0 0 10px #fff,
+    0 0 20px #ff6666,
+    0 0 40px #ff6666;
+  text-shadow: 1px 1px 2px #000;
+  transition: transform 0.3s ease-in-out;
 }
 
-.text-with-image > img {
-    width: 70%;
+#startBtn:hover {
+  transform: scale(1.1);
+}
+
+@keyframes zoomInOut {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+#gameCanvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  border: none;
+}
+
+.site-credits {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 0.85rem;
+  color: #3d2b1f;
+  opacity: 0.7;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
